@@ -1,7 +1,7 @@
 Type: Package
 Package: rsconnect
 Title: Deploy Docs, Apps, and APIs to 'Posit Connect', 'shinyapps.io', and 'RPubs'
-Version: 1.4.1.9000
+Version: 1.4.2.9000
 Authors@R: c(
     person("Aron", "Atkins", , "aron@posit.co", role = c("aut", "cre")),
     person("Toph", "Allen", role = "aut"),
@@ -31,10 +31,9 @@ Imports:
     renv (>= 1.0.0),
     rlang (>= 1.0.0),
     rstudioapi (>= 0.5),
+    snowflakeauth,
     tools,
     yaml (>= 2.1.5),
-    RcppTOML,
-    jose,
     utils
 Suggests:
     Biobase,
