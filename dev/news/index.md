@@ -2,6 +2,24 @@
 
 ## rsconnect (development version)
 
+- Added support for deploying from `manifest.json` files created by
+  [`writeManifest()`](https://rstudio.github.io/rsconnect/dev/reference/writeManifest.md):
+  use the `manifestPath` argument of
+  [`deployApp()`](https://rstudio.github.io/rsconnect/dev/reference/deployApp.md)
+  and related functions to specify the path to an existing manifest
+  file. ([\#1259](https://github.com/rstudio/rsconnect/issues/1259))
+
+- `urlEncode()` now uses
+  [`curl::curl_escape()`](https://jeroen.r-universe.dev/curl/reference/curl_escape.html)
+  instead of
+  [`RCurl::curlEscape()`](https://rdrr.io/pkg/RCurl/man/curlEscape.html),
+  as RCurl is a Suggests dependency.
+  ([\#1265](https://github.com/rstudio/rsconnect/issues/1265))
+
+- The `User-Agent` header in requests made from rsconnect will now be of
+  the format `RSConnect/x.y.z` instead of `rsconnect/x.y.z` in order to
+  satisfy web application firewalls that enforce Pascal case.
+
 ## rsconnect 1.6.2
 
 CRAN release: 2025-11-18
