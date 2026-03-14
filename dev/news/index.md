@@ -29,7 +29,9 @@
   Connect servers hosted on Snowflake.
 
 - Push-button publishing from desktop RStudio is now compatible with
-  Connect servers hosted on Snowflake.
+  Connect servers hosted on Snowflake. This includes support for
+  browser-based authentication during deployment.
+  ([\#1289](https://github.com/rstudio/rsconnect/issues/1289))
 
 - Added support for using identity federation to authenticate against
   Connect when running in Posit Workbench, when available. This allows
@@ -42,6 +44,10 @@
   workflow, please file an issue and we will consider reintroduction of
   log streaming via rsconnect in Connect Cloud.
   ([\#1292](https://github.com/rstudio/rsconnect/issues/1292))
+
+- Added support for renv profiles and renv lockfiles that are located
+  outside of the project root.
+  ([\#1122](https://github.com/rstudio/rsconnect/issues/1122))
 
 ## rsconnect 1.7.0
 
@@ -56,9 +62,7 @@ CRAN release: 2025-12-06
 
 - `urlEncode()` now uses
   [`curl::curl_escape()`](https://jeroen.r-universe.dev/curl/reference/curl_escape.html)
-  instead of
-  [`RCurl::curlEscape()`](https://rdrr.io/pkg/RCurl/man/curlEscape.html),
-  as RCurl is a Suggests dependency.
+  instead of `RCurl::curlEscape()`, as RCurl is a Suggests dependency.
   ([\#1265](https://github.com/rstudio/rsconnect/issues/1265))
 
 - The `User-Agent` header in requests made from rsconnect will now be of
