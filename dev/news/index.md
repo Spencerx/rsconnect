@@ -2,6 +2,22 @@
 
 ## rsconnect (development version)
 
+- Fixed an issue where Bioconductor packages could be incorrectly
+  associated with a CRAN repository URL when the same package appeared
+  in CRAN’s Transit directory.
+  ([\#1314](https://github.com/rstudio/rsconnect/issues/1314))
+
+- The global deployment history file used by the Workbench dashboard no
+  longer uses a fixed temporary file name during updates, eliminating a
+  race condition that could cause the file to rapidly grow during
+  concurrent deployments. The history is also capped at 100 records and
+  resets if the file grows excessively large.
+  ([\#1320](https://github.com/rstudio/rsconnect/issues/1320))
+
+- [`deployApp()`](https://rstudio.github.io/rsconnect/dev/reference/deployApp.md)
+  with `logLevel = "verbose"` no longer errors using the `httr2`
+  backend. ([\#1312](https://github.com/rstudio/rsconnect/issues/1312))
+
 ## rsconnect 1.8.0
 
 CRAN release: 2026-04-10
