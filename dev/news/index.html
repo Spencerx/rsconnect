@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">rsconnect</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.8.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.10.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,13 +37,29 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="rsconnect-development-version">rsconnect (development version)<a class="anchor" aria-label="anchor" href="#rsconnect-development-version"></a></h2>
+<ul><li><p>rsconnect checks whether a newer version of itself is available from your configured repositories, and lets you know: as a startup message when the package is attached interactively, and as a note appended to deployment errors otherwise. <code><a href="../reference/deployApp.html">deployApp()</a></code> also reports the rsconnect version in use (and the newer version, when one is known) so that captured deploy logs record it. The check can be disabled by setting <code>options(rsconnect.check_updates = FALSE)</code>. (<a href="https://github.com/rstudio/rsconnect/issues/1342" class="external-link">#1342</a>)</p></li>
+<li><p>New <code><a href="../reference/migrateToConnectCloud.html">migrateToConnectCloud()</a></code> rewrites a local deployment record so a previously-deployed app (e.g. deployed to shinyapps.io) points at an existing Posit Connect Cloud content item instead, so the next deploy (including the RStudio IDE’s Publish button) routes to Connect Cloud. If no Connect Cloud account is registered yet, it guides you through setting one up first. (<a href="https://github.com/rstudio/rsconnect/issues/1353" class="external-link">#1353</a>)</p></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.10.1" id="rsconnect-1101">rsconnect 1.10.1<a class="anchor" aria-label="anchor" href="#rsconnect-1101"></a></h2><p class="text-muted">CRAN release: 2026-07-08</p>
+<ul><li><p>Fixed a regression where <code><a href="../reference/deployApp.html">deployApp()</a></code> and <code><a href="../reference/writeManifest.html">writeManifest()</a></code> would install BiocManager and contact bioconductor.org during dependency capture even for projects with no Bioconductor dependencies, breaking deployment of CRAN-only content in air-gapped or offline environments. Bioconductor repositories are now resolved only when a Bioconductor-sourced package is present. (<a href="https://github.com/rstudio/rsconnect/issues/1337" class="external-link">#1337</a>)</p></li>
+<li><p><code>deployApp(contentCategory)</code> now defaults to <code>"mcp"</code> for deployments with a <code>_server.yml</code> and <code>engine: mcptools</code> (<a href="https://github.com/rstudio/rsconnect/issues/1343" class="external-link">#1343</a>).</p></li>
+<li><p>Use <code><a href="https://jeroen.r-universe.dev/openssl/reference/rsa_encrypt.html" class="external-link">openssl::rsa_sign</a></code> rather than PKI signing. (<a href="https://github.com/rstudio/rsconnect/issues/1333" class="external-link">#1333</a>)</p></li>
+<li><p>Address CRAN test failures from sample packages using custom encoding. (<a href="https://github.com/rstudio/rsconnect/issues/1344" class="external-link">#1344</a>)</p></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.10.0" id="rsconnect-1100">rsconnect 1.10.0<a class="anchor" aria-label="anchor" href="#rsconnect-1100"></a></h2><p class="text-muted">CRAN release: 2026-06-08</p>
 <ul><li><p>Added support for deploying Node.js applications to Posit Connect. <code><a href="../reference/deployApp.html">deployApp()</a></code> and <code><a href="../reference/writeManifest.html">writeManifest()</a></code> now automatically detect Node.js content from <code>package.json</code> and generate the appropriate manifest. Added <code>envManagementNodejs</code> parameter for controlling Node.js environment management. <a href="https://docs.posit.co/connect/user/nodejs/" class="external-link">Node.js support</a> is in Early Access as of Connect version 2026.04.0. (<a href="https://github.com/rstudio/rsconnect/issues/1322" class="external-link">#1322</a>)</p></li>
 <li><p>Added a new function, <code>connectCloudClientCredentials</code>, for adding Posit Connect Cloud credentials (managed at <a href="https://login.posit.cloud/identity/credentials" class="external-link uri">https://login.posit.cloud/identity/credentials</a>) non-interactively.</p></li>
 <li><p>Fixed an issue where Bioconductor packages could be incorrectly associated with a CRAN repository URL when the same package appeared in CRAN’s Transit directory. (<a href="https://github.com/rstudio/rsconnect/issues/1314" class="external-link">#1314</a>)</p></li>
 <li><p>The global deployment history file used by the Workbench dashboard no longer uses a fixed temporary file name during updates, eliminating a race condition that could cause the file to rapidly grow during concurrent deployments. The history is also capped at 100 records and resets if the file grows excessively large. (<a href="https://github.com/rstudio/rsconnect/issues/1320" class="external-link">#1320</a>)</p></li>
 <li><p><code><a href="../reference/deployApp.html">deployApp()</a></code> with <code>logLevel = "verbose"</code> no longer errors using the <code>httr2</code> backend. (<a href="https://github.com/rstudio/rsconnect/issues/1312" class="external-link">#1312</a>)</p></li>
 <li><p><code><a href="../reference/deployApp.html">deployApp()</a></code>, <code><a href="../reference/writeManifest.html">writeManifest()</a></code>, and <code><a href="../reference/appDependencies.html">appDependencies()</a></code> gain a <code>dependencyResolution</code> parameter. Set <code>dependencyResolution = "library"</code> to ignore the <code>renv.lock</code> file and resolve package dependencies by scanning the code. The version that is recorded is what is installed in the libraries active in the R session (i.e. what is displayed with <code><a href="https://rdrr.io/r/base/libPaths.html" class="external-link">.libPaths()</a></code>). This is useful when deploying from environments where there is a mismatch between the renv lock file and the user’s environment. (<a href="https://github.com/rstudio/rsconnect/issues/1046" class="external-link">#1046</a>, <a href="https://github.com/rstudio/rsconnect/issues/1315" class="external-link">#1315</a>, <a href="https://github.com/rstudio/rsconnect/issues/1317" class="external-link">#1317</a>)</p></li>
-<li><p>Improved error messages when <code><a href="https://rstudio.github.io/renv/reference/snapshot.html" class="external-link">renv::snapshot()</a></code> fails during dependency discovery. (<a href="https://github.com/rstudio/rsconnect/issues/1078" class="external-link">#1078</a>)</p></li>
+<li>
+<p>Improved error messages when <code><a href="https://rstudio.github.io/renv/reference/snapshot.html" class="external-link">renv::snapshot()</a></code> fails during dependency discovery. (<a href="https://github.com/rstudio/rsconnect/issues/1078" class="external-link">#1078</a>)</p>
+<ul><li>
+<code><a href="../reference/addServer.html">addServer()</a></code> now reports the underlying reason a URL was rejected (e.g. connection error, TLS/certificate problem, or unexpected HTTP status). (<a href="https://github.com/rstudio/rsconnect/issues/1197" class="external-link">#1197</a>)</li>
+</ul></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.8.0" id="rsconnect-180">rsconnect 1.8.0<a class="anchor" aria-label="anchor" href="#rsconnect-180"></a></h2><p class="text-muted">CRAN release: 2026-04-10</p>
@@ -381,7 +397,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
   </div></footer></body></html>

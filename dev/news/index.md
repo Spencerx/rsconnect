@@ -2,6 +2,56 @@
 
 ## rsconnect (development version)
 
+- rsconnect checks whether a newer version of itself is available from
+  your configured repositories, and lets you know: as a startup message
+  when the package is attached interactively, and as a note appended to
+  deployment errors otherwise.
+  [`deployApp()`](https://rstudio.github.io/rsconnect/dev/reference/deployApp.md)
+  also reports the rsconnect version in use (and the newer version, when
+  one is known) so that captured deploy logs record it. The check can be
+  disabled by setting `options(rsconnect.check_updates = FALSE)`.
+  ([\#1342](https://github.com/rstudio/rsconnect/issues/1342))
+
+- New
+  [`migrateToConnectCloud()`](https://rstudio.github.io/rsconnect/dev/reference/migrateToConnectCloud.md)
+  rewrites a local deployment record so a previously-deployed app
+  (e.g. deployed to shinyapps.io) points at an existing Posit Connect
+  Cloud content item instead, so the next deploy (including the RStudio
+  IDE’s Publish button) routes to Connect Cloud. If no Connect Cloud
+  account is registered yet, it guides you through setting one up first.
+  ([\#1353](https://github.com/rstudio/rsconnect/issues/1353))
+
+## rsconnect 1.10.1
+
+CRAN release: 2026-07-08
+
+- Fixed a regression where
+  [`deployApp()`](https://rstudio.github.io/rsconnect/dev/reference/deployApp.md)
+  and
+  [`writeManifest()`](https://rstudio.github.io/rsconnect/dev/reference/writeManifest.md)
+  would install BiocManager and contact bioconductor.org during
+  dependency capture even for projects with no Bioconductor
+  dependencies, breaking deployment of CRAN-only content in air-gapped
+  or offline environments. Bioconductor repositories are now resolved
+  only when a Bioconductor-sourced package is present.
+  ([\#1337](https://github.com/rstudio/rsconnect/issues/1337))
+
+- `deployApp(contentCategory)` now defaults to `"mcp"` for deployments
+  with a `_server.yml` and `engine: mcptools`
+  ([\#1343](https://github.com/rstudio/rsconnect/issues/1343)).
+
+- Use
+  [`openssl::rsa_sign`](https://jeroen.r-universe.dev/openssl/reference/rsa_encrypt.html)
+  rather than PKI signing.
+  ([\#1333](https://github.com/rstudio/rsconnect/issues/1333))
+
+- Address CRAN test failures from sample packages using custom encoding.
+  ([\#1344](https://github.com/rstudio/rsconnect/issues/1344))
+
+## rsconnect 1.10.0
+
+CRAN release: 2026-06-08
+
 - Added support for deploying Node.js applications to Posit Connect.
   [`deployApp()`](https://rstudio.github.io/rsconnect/dev/reference/deployApp.md)
   and
@@ -53,6 +103,12 @@
   [`renv::snapshot()`](https://rstudio.github.io/renv/reference/snapshot.html)
   fails during dependency discovery.
   ([\#1078](https://github.com/rstudio/rsconnect/issues/1078))
+
+  - [`addServer()`](https://rstudio.github.io/rsconnect/dev/reference/addServer.md)
+    now reports the underlying reason a URL was rejected (e.g.
+    connection error, TLS/certificate problem, or unexpected HTTP
+    status).
+    ([\#1197](https://github.com/rstudio/rsconnect/issues/1197))
 
 ## rsconnect 1.8.0
 

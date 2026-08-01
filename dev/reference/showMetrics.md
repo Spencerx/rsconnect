@@ -45,10 +45,10 @@ showMetrics(
   `-`. The application name is used to identify applications on a
   server, so must be unique.
 
-  If not specified, the first deployment will be automatically it from
-  the `appDir` for directory and website, and from the `appPrimaryDoc`
-  for document. On subsequent deploys, it will use the previously stored
-  value.
+  If not specified, the name is automatically derived on the first
+  deployment from `appDir` for applications and websites, and from
+  `appPrimaryDoc` for documents. On subsequent deploys, the previously
+  stored value is used.
 
 - account, server:
 
@@ -72,5 +72,5 @@ showMetrics(
 
 - interval:
 
-  Summarization interval. Data points at intervals less then this will
+  Summarization interval. Data points at intervals less than this will
   be grouped. (Relative time delta e.g. "120s" or "1h" or "30d").

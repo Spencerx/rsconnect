@@ -95,15 +95,15 @@ deployApp(
   `-`. The application name is used to identify applications on a
   server, so must be unique.
 
-  If not specified, the first deployment will be automatically it from
-  the `appDir` for directory and website, and from the `appPrimaryDoc`
-  for document. On subsequent deploys, it will use the previously stored
-  value.
+  If not specified, the name is automatically derived on the first
+  deployment from `appDir` for applications and websites, and from
+  `appPrimaryDoc` for documents. On subsequent deploys, the previously
+  stored value is used.
 
 - appTitle:
 
   Free-form descriptive title of application. Optional; if supplied,
-  will often be displayed in favor of the name. If ommitted, on second
+  will often be displayed in favor of the name. If omitted, on second
   and subsequent deploys, the title will be unchanged.
 
 - envVars:
@@ -202,7 +202,7 @@ deployApp(
   If true, the system's default web browser will be launched
   automatically after the app is started. Defaults to `TRUE` in
   interactive sessions only. If a function is passed, it will be called
-  after the app is started, with the app URL as a paramter.
+  after the app is started, with the app URL as a parameter.
 
 - on.failure:
 
