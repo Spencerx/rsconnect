@@ -2,6 +2,10 @@
 
 ## rsconnect (development version)
 
+## rsconnect 1.11.0
+
+CRAN release: 2026-08-25
+
 - rsconnect checks whether a newer version of itself is available from
   your configured repositories, and lets you know: as a startup message
   when the package is attached interactively, and as a note appended to
@@ -19,6 +23,9 @@
   Cloud content item instead, so the next deploy (including the RStudio
   IDE’s Publish button) routes to Connect Cloud. If no Connect Cloud
   account is registered yet, it guides you through setting one up first.
+  When the local deployment record has been lost, it reconstructs the
+  record from `contentId` alone, taking the name from `appName` or the
+  content’s title.
   ([\#1353](https://github.com/rstudio/rsconnect/issues/1353))
 
 ## rsconnect 1.10.1
