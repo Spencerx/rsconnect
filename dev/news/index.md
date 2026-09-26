@@ -2,6 +2,29 @@
 
 ## rsconnect (development version)
 
+- New
+  [`deleteContent()`](https://rstudio.github.io/rsconnect/dev/reference/deleteContent.md)
+  permanently deletes content from Posit Connect Cloud. It asks for
+  confirmation unless `force = TRUE`, and removes the local deployment
+  record when the content was found through one
+  ([\#1386](https://github.com/rstudio/rsconnect/issues/1386)).
+
+- `deployApp(appVisibility =)` now sets the visibility of Posit Connect
+  Cloud content. On Connect Cloud it also accepts
+  `"view_team_edit_private"`, `"view_team_edit_team"`, and
+  `"view_public_edit_team"`, which share content with members of the
+  account. Unsupported values now fail before deploying, rather than on
+  the server
+  ([\#1385](https://github.com/rstudio/rsconnect/issues/1385)).
+
+## rsconnect 1.11.1
+
+CRAN release: 2026-09-21
+
+- Redeploying to Posit Connect now opens the content in the Connect
+  dashboard, rather than in standalone view, matching initial deploys
+  ([\#1372](https://github.com/rstudio/rsconnect/issues/1372)).
+
 - Connect Cloud deployments no longer send empty values for environment
   variables that are unset in the current R session.
   ([\#1361](https://github.com/rstudio/rsconnect/issues/1361))
@@ -27,6 +50,7 @@
 - Deploying to Posit Connect Cloud content that has no environment
   variables no longer fails on R \< 4.2.0 with “zero-length inputs
   cannot be mixed with those of non-zero length”.
+  ([\#1378](https://github.com/rstudio/rsconnect/issues/1378))
 
 - `deployApp(appId=)` now works for Posit Connect Cloud content.
   Deploying to an existing content item by id (rather than via a local
@@ -65,10 +89,6 @@
 - [`applications()`](https://rstudio.github.io/rsconnect/dev/reference/applications.md)
   now supports Posit Connect Cloud accounts, returning a data frame with
   the same columns as for ShinyApps and Posit Connect accounts.
-
-- Redeploying to Posit Connect now opens the content in the Connect
-  dashboard, rather than in standalone view, matching initial deploys
-  ([\#1372](https://github.com/rstudio/rsconnect/issues/1372)).
 
 ## rsconnect 1.11.0
 
